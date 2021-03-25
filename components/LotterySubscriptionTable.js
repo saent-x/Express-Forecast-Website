@@ -28,54 +28,56 @@ export default function LotterySuscriptionTable() {
   const showFullList = () => {};
 
   return (
-    <Table variant="simple" marginTop="10px">
-      <Thead backgroundColor="red">
-        <Tr>
-          <Th color="white">LOTTERY</Th>
-          <Th color="white">SUBSCRIPTION CODE</Th>
-        </Tr>
-      </Thead>
-      <Tbody>
-        {list.map((x, i) => (
-          <Tr key={i}>
-            <Td>
-              <Flex direction="row" align="center">
-                <Image src={x.url} />
+    <div style={{ overflowX: "auto" }}>
+      <Table variant="simple" marginTop="10px" bg="white">
+        <Thead backgroundColor="red">
+          <Tr>
+            <Th color="white">LOTTERY</Th>
+            <Th color="white">SUBSCRIPTION CODE</Th>
+          </Tr>
+        </Thead>
+        <Tbody>
+          {list.map((x, i) => (
+            <Tr key={i}>
+              <Td>
+                <Flex direction="row" align="center">
+                  <Image src={x.url} />
+                  <Text
+                    marginLeft="15px"
+                    fontSize="xl"
+                    color="red"
+                    fontWeight="bold"
+                  >
+                    {x.text}
+                  </Text>
+                </Flex>
+              </Td>
+              <Td>
                 <Text
                   marginLeft="15px"
                   fontSize="xl"
                   color="red"
                   fontWeight="bold"
                 >
-                  {x.text}
+                  {x.code}
                 </Text>
-              </Flex>
-            </Td>
-            <Td>
-              <Text
-                marginLeft="15px"
-                fontSize="xl"
-                color="red"
-                fontWeight="bold"
-              >
-                {x.code}
-              </Text>
-            </Td>
-          </Tr>
-        ))}
-      </Tbody>
-      <Tfoot>
-        <Center
-          backgroundColor="grey"
-          h="50px"
-          width="300px"
-          color="white"
-                  cursor="pointer"
-                  className={styles.btn}
-        >
-          <Text>CLICK HERE FOR MORE CODES {">>"}</Text>
-        </Center>
-      </Tfoot>
-    </Table>
+              </Td>
+            </Tr>
+          ))}
+        </Tbody>
+        <Tfoot>
+          <Center
+            backgroundColor="grey"
+            h="50px"
+            width="300px"
+            color="white"
+            cursor="pointer"
+            className={styles.btn}
+          >
+            <Text>CLICK HERE FOR MORE CODES {">>"}</Text>
+          </Center>
+        </Tfoot>
+      </Table>
+    </div>
   );
 }

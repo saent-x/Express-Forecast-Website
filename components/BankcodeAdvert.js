@@ -22,24 +22,24 @@ export default function BankcodeAdvert() {
       "UBA - *919#",
     ];
   return (
-    <Flex direction="row" marginTop="10px">
-      <Box bg="red" w="59%" h="316.88px">
+    <Flex direction="row" marginTop="10px" wrap="wrap">
+      <Box bg="red" w={{ base: "100%", md: "59%", lg: "59%" }} h="316.88px">
         <Stack spacing={3}>
           <Flex direction="row">
             <Center
               bg="white"
               h="50px"
-              w="60%"
+              w={{ base: "0px", md: "60%", lg: "60%" }}
               justifySelf="flex-start"
             ></Center>
-            <Center bg="red" h="50px" w="40%">
-              <Text fontWeight="bold" fontSize="lg" color="white">
-                Know Your Bank Codes
+            <Center bg="red" h="50px" w={{ base: "100%", md: "40%", lg: "40%" }}>
+              <Text p="5px" bg="white" fontWeight="bold" fontSize="lg" color="red">
+                KNOW YOUR BANK CODES
               </Text>
             </Center>
           </Flex>
 
-          <div style={{ padding: "20px" }}>
+          <div style={{ padding: "20px", paddingTop: "10px" }}>
             {codeList.map((x, i) => (
               <Text
                 fontWeight="bold"
@@ -59,7 +59,7 @@ export default function BankcodeAdvert() {
         borderColor="grey"
         borderWidth="1px"
         bg="white"
-        w="39%"
+        w={{ base: "100%", md: "39%", lg: "39%" }}
         h="316.88px"
       >
         <Image src="../4.png" />

@@ -24,15 +24,18 @@ export default function GameTimer() {
     ];
     
     return (
-      <HStack direction="row" marginTop="10px" justify="center" spacing={8}>
+      <Flex direction="row" marginTop="10px" justify="center" spacing={8} wrap="wrap">
         {gameTimes.map((x, i) => (
           <Center
             borderColor="grey"
             borderWidth="1px"
             bg="white"
+            flexWrap="wrap"
             w="300px"
-                h="350px"
-                key={i}
+                h="100%"
+            key={i}
+            margin="10px"
+            paddingBottom="20px"
           >
             <VStack>
               <Image src={x.url} />
@@ -56,6 +59,6 @@ export default function GameTimer() {
             </VStack>
           </Center>
         ))}
-      </HStack>
+      </Flex>
     );
 }

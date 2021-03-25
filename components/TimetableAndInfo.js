@@ -28,11 +28,10 @@ export default function TimetableAndInfo() {
       },
     ];
   return (
-    <Flex direction="row" marginTop="10px">
+    <Flex direction="row" marginTop="10px" wrap="wrap">
       <Center
         bg="white"
-        w="59%"
-        h="500px"
+        w={{ base: "100%", md: "59%", lg: "59%" }}
         borderColor="black"
         borderWidth="1px"
         padding="25px"
@@ -71,7 +70,7 @@ export default function TimetableAndInfo() {
         borderColor="grey"
         borderWidth="1px"
         bg="white"
-        w="39%"
+        w={{ base: "100%", md: "39%", lg: "39%" }}
         h="500px"
         borderColor="black"
         borderWidth="1px"

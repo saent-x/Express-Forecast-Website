@@ -4,6 +4,7 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    background-color: whitesmoke !important;
 }
 
 a {
@@ -15,44 +16,51 @@ a {
   box-sizing: border-box;
 }
 
-
-.ulist, .ulist2 {
-    list-style: none;
-        color: white
-
+.ulist,
+.ulist2 {
+  list-style: none;
+  color: white;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.ulist > li{
-    display: inline;
-    margin: 5px;
-    color: white;
-    margin: 10px;
+.ulist > li {
+  display: inline;
+  margin: 5px;
+  color: white;
+  margin: 10px;
 }
 
-.ulist > li a{
-    font-size: 15px;
-    text-decoration: none;
+.ulist > li a {
+  font-size: 15px;
+  text-decoration: none;
 }
 
-.ulist > li > a:hover{
-    text-decoration: underline;
-    color: gainsboro;
+.ulist > li > a:hover {
+  text-decoration: underline;
+  color: gainsboro;
 }
 
-
-
-.ulist2 > li{
-    display: inline;
-    margin: 10px;
-    color: white;
+.ulist2 > li {
+  display: inline;
+  margin: 10px;
+  color: white;
 }
 
-.ulist2 > li a{
-    font-size: 18px;
-    font-weight: 100;
+.ulist2 > li a {
+  font-size: 18px;
+  font-weight: 100;
 }
 
-.ulist2 > li > a:hover{
-    text-decoration: underline;
-    color: gainsboro;
+.ulist2 > li > a:hover {
+  text-decoration: underline;
+  color: gainsboro;
+}
+
+@media only screen and (max-width: 600px) {
+  .ulist,
+  .ulist2 {
+    width: 80%;
+  }
 }

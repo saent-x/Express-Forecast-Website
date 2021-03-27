@@ -7,8 +7,39 @@ import {
   Image,
   Spacer,
 } from "@chakra-ui/react";
+import { useQuery } from "@apollo/react-hooks";
+import { gql } from "apollo-boost";
+import { motion } from "framer-motion";
+
+const MotionImage = motion(Image);
+
+const QUERY = gql`
+  {
+    footerHeadline1 {
+      header
+      content
+    }
+    footerHeadline2 {
+      header
+      content
+    }
+    footerHeadline3 {
+      header
+      content
+    }
+    socials {
+      image {
+        url
+      }
+    }
+  }
+`;
 
 export default function Footer() {
+  const { loading, error, data } = useQuery(QUERY);
+  if (error) return "Error loading... contact Admin";
+  if (loading) return <h1>...</h1>;
+
   return (
     <Flex
       direction="column"
@@ -17,17 +48,13 @@ export default function Footer() {
       h={{ base: "auto", md: "vertical", lg: "vertical" }}
       mt="10px"
     >
-      <Flex direction="row" wrap={{ base: "wrap" , md: "nowrap", lg: "nowrap"}}>
+      <Flex direction="row" wrap={{ base: "wrap", md: "nowrap", lg: "nowrap" }}>
         <Stack spacing={3} padding="30px" wrap="wrap">
           <Text color="white" fontSize="25px" fontWeight="bolder">
-            Our Story
+            {data.footerHeadline1.header}
           </Text>
           <Text fontSize="20px" fontWeight="thin" color="white">
-            Join the fun and say good bye to just playing random numbers.
-            Expressforecast offers refined forecast numbers through our super
-            algorithm to help you win your favorite lotto games easily. Baba
-            Ijebu, Golden chance, Lottomania, Ghana Lotto and many more
-            lotteries from around the world are available for you 24/7.
+            {data.footerHeadline1.content}
           </Text>
         </Stack>
         <Divider
@@ -42,14 +69,10 @@ export default function Footer() {
         />
         <Stack spacing={3} padding="30px" wrap="wrap">
           <Text color="white" fontSize="25px" fontWeight="bolder">
-            Our Story
+            {data.footerHeadline1.header}
           </Text>
           <Text fontSize="20px" fontWeight="thin" color="white">
-            Join the fun and say good bye to just playing random numbers.
-            Expressforecast offers refined forecast numbers through our super
-            algorithm to help you win your favorite lotto games easily. Baba
-            Ijebu, Golden chance, Lottomania, Ghana Lotto and many more
-            lotteries from around the world are available for you 24/7.
+            {data.footerHeadline1.content}
           </Text>
         </Stack>
         <Divider
@@ -64,14 +87,10 @@ export default function Footer() {
         />
         <Stack spacing={3} padding="30px" wrap="wrap">
           <Text color="white" fontSize="25px" fontWeight="bolder">
-            Our Story
+            {data.footerHeadline1.header}
           </Text>
           <Text fontSize="20px" fontWeight="thin" color="white">
-            Join the fun and say good bye to just playing random numbers.
-            Expressforecast offers refined forecast numbers through our super
-            algorithm to help you win your favorite lotto games easily. Baba
-            Ijebu, Golden chance, Lottomania, Ghana Lotto and many more
-            lotteries from around the world are available for you 24/7.
+            {data.footerHeadline1.content}
           </Text>
         </Stack>
       </Flex>
@@ -87,11 +106,19 @@ export default function Footer() {
             Join Our Community
           </Text>
           <Flex direction="row" wrap="wrap">
-            <Image src="../t.png" />
             <Spacer />
-            <Image src="../I.png" />
-            <Spacer />
-            <Image src="../F.png" />
+            {data.socials.map((x, i) => (
+              <>
+                <MotionImage
+                  key={i}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  cursor="pointer"
+                  src={`http://localhost:1337${x.image.url}`}
+                />
+                <Spacer />
+              </>
+            ))}
           </Flex>
         </Stack>
       </Center>

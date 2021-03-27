@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/game-timetables",
+      "handler": "game-timetable.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/game-timetables/count",
+      "handler": "game-timetable.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/game-timetables/:id",
+      "handler": "game-timetable.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/game-timetables",
+      "handler": "game-timetable.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/game-timetables/:id",
+      "handler": "game-timetable.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/game-timetables/:id",
+      "handler": "game-timetable.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

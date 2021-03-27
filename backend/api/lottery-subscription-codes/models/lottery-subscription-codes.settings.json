@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "lottery_subscription_codes",
+  "info": {
+    "name": "lottery Subscription Codes"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "logo": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "lottery": {
+      "type": "string"
+    },
+    "subscription_code": {
+      "type": "string"
+    }
+  }
+}

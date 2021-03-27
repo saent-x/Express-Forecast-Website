@@ -1,0 +1,17 @@
+{
+  "kind": "collectionType",
+  "collectionName": "bank_codes",
+  "info": {
+    "name": "Bank Codes"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "code": {
+      "type": "string"
+    }
+  }
+}

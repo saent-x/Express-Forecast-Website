@@ -15,30 +15,153 @@ import {
   Input,
   Image,
 } from "@chakra-ui/react";
+import { useQuery, useMutation } from "@apollo/react-hooks";
+import { gql } from "apollo-boost";
+import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+
+const QUERY = gql`
+  {
+    logo {
+      logo_file {
+        url
+      }
+    }
+    newsletterBackground {
+      background {
+        url
+      }
+    }
+  }
+`;
+
+const ADD_SUBSCRIBER = gql`
+  mutation CreateNewsletterSubscriberMutation(
+    $createNewsletterSubscriberInput: createNewsletterSubscriberInput
+  ) {
+    createNewsletterSubscriber(input: $createNewsletterSubscriberInput) {
+      newsletterSubscriber {
+        name
+        email
+        phone
+      }
+    }
+  }
+`;
 
 export default function Header() {
+  const [subscriber, setSubscriber] = useState({
+    name: "",
+    email: "",
+    phone: 0,
+  });
+  const [saving, setSaving] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [addsubscriber] = useMutation(ADD_SUBSCRIBER);
+  const { loading, error, data } = useQuery(QUERY);
+  if (error) return "Error loading... contact Admin";
+  if (loading) return <h1>...</h1>;
 
+  const subscribe = () => {
+    if (subscriber.name.trim() === "" || subscriber.email.trim() === "" || subscriber.phone < 0) {
+      toast.info("Fill in the boxes!!", {
+        position: "top-right",
+        autoClose: 5000,
+        closeOnClick: true,
+        progress: undefined,
+      });
+    }
+    setSaving(true);
+
+    addsubscriber({
+      variables: {
+        createNewsletterSubscriberInput: {
+          data: {
+            ...subscriber
+          },
+        },
+      },
+    })
+      .then((result) => {
+          setTimeout(async () => {
+            setSaving(false);
+            toast.success("Successful!! 😃", {
+              position: "top-right",
+              autoClose: 5000,
+              closeOnClick: true,
+              progress: undefined,
+            });
+            onClose()
+          }, 2000);
+      })
+      .catch((error) => {
+        setSaving(false);
+        toast.error("Please try again! 😪", {
+          position: "top-right",
+          autoClose: 5000,
+          closeOnClick: true,
+          progress: undefined,
+        });
+      });
+  };
+
+  const onInput = (e) => {
+    const obj = { ...subscriber };
+    obj[e.target.id] = e.target.value;
+    setSubscriber(obj);
+  };
   return (
     <>
+      <ToastContainer />
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <Image src="/sbg.png" h="100%" w="100%" position="absolute" />
+          <Image
+            src={`http://localhost:1337${data.newsletterBackground.background.url}`}
+            h="100%"
+            w="100%"
+            position="absolute"
+          />
           <ModalHeader color="black">Subscribe</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6} pt="100px">
-            <FormControl>
-              <Input bg="white" placeholder="name" />
+            <FormControl mb="10px">
+              <Input
+                bg="white"
+                placeholder="name"
+                id="name"
+                value={subscriber.name}
+                onChange={(e) => onInput(e)}
+              />
             </FormControl>
-            <br/>
-            <FormControl>
-              <Input bg="white" placeholder="email" />
+            <FormControl mb="10px">
+              <Input
+                bg="white"
+                placeholder="email"
+                id="email"
+                value={subscriber.email}
+                onChange={(e) => onInput(e)}
+              />
+            </FormControl>
+            <FormControl mb="10px">
+              <Input
+                bg="white"
+                type="number"
+                placeholder="phone"
+                id="phone"
+                onChange={(e) => onInput(e)}
+              />
             </FormControl>
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="red" mr={3}>
+            <Button
+              isLoading={saving}
+              loadingText="subscribing"
+              colorScheme="red"
+              mr={3}
+              onClick={subscribe}
+            >
               Subscribe
             </Button>
             <Button onClick={onClose}>Cancel</Button>
@@ -55,7 +178,7 @@ export default function Header() {
         <Navbar.Brand href="#home">
           <img
             alt=""
-            src="/logo.png"
+            src={`http://localhost:1337${data.logo.logo_file.url}`}
             width="150"
             height="100"
             className="d-inline-block align-top"
@@ -64,19 +187,13 @@ export default function Header() {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
-            <Nav.Link className={styles.black} href="#home">
+            <Nav.Link className={styles.link} href="/">
               Home
             </Nav.Link>
-            <Nav.Link className={styles.black} href="#features">
-              Timetable
-            </Nav.Link>
-            <Nav.Link className={styles.black} href="#pricing">
-              About us
-            </Nav.Link>
-            <Nav.Link className={styles.black} href="#pricing">
+            <Nav.Link className={styles.link} href="#pricing">
               How to play
             </Nav.Link>
-            <Nav.Link className={styles.black} href="#pricing">
+            <Nav.Link className={styles.link} href="#pricing">
               Contact us
             </Nav.Link>
           </Nav>

@@ -1,0 +1,17 @@
+{
+  "kind": "singleType",
+  "collectionName": "information_banners",
+  "info": {
+    "name": "Information Banner"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "info": {
+      "type": "text"
+    }
+  }
+}

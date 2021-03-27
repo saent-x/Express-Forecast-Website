@@ -1,0 +1,28 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/newsletter-background",
+      "handler": "newsletter-background.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/newsletter-background",
+      "handler": "newsletter-background.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/newsletter-background",
+      "handler": "newsletter-background.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

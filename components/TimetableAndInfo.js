@@ -16,146 +16,239 @@ import {
   Th,
   Td,
   TableCaption,
+  Grid,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  Button,
+  useDisclosure,
+  FormLabel,
+  FormControl,
+  Input,
 } from "@chakra-ui/react";
 import styles from "../styles/TimetableAndInfo.module.css";
+import { useQuery, useMutation, useApolloClient } from "@apollo/react-hooks";
+import { gql } from "apollo-boost";
+import { motion } from "framer-motion";
+import { useState } from "react";
+
+const MotionCenter = motion(Center);
+const MotionImage = motion(Image);
+
+const QUERY = gql`
+  {
+    homepageDescription {
+      Header
+      Content
+    }
+    gameTimetables {
+      Operator
+      logo {
+        url
+      }
+    }
+  }
+`;
+
+const GET_TABLE = gql`
+  query ExampleQuery($timetablesWhere: JSON) {
+    timetables(where: $timetablesWhere) {
+      operator {
+        Operator
+      }
+      game
+      day
+      closing_time
+      draw_time
+    }
+  }
+`;
 
 export default function TimetableAndInfo() {
-    const list = [
-      {
-        url1: "../1.png",
-        url2: "../2.png",
-        url3: "../3.png",
-      },
-    ];
+  const [table, setTable] = useState([]);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const client = useApolloClient();
+
+  const { loading, error, data } = useQuery(QUERY);
+
+  if (error) return "Error loading... contact Admin";
+  if (loading) return <h1>...</h1>;
+
+  const info = data.homepageDescription;
+  const operators = data.gameTimetables;
+
   return (
-    <Flex direction="row" marginTop="10px" wrap="wrap">
-      <Center
-        bg="white"
-        w={{ base: "100%", md: "59%", lg: "59%" }}
-        borderColor="black"
-        borderWidth="1px"
-        padding="25px"
-      >
-        <Stack spacing={3}>
-          <Text color="red" fontSize="25px" fontWeight="bolder">
-            Play Lotto Smarter using Expressforecast
-          </Text>
-          <Text fontSize="20px" fontWeight="thin">
-            Tired of losing tickets everytime you play lotto or getting late
-            lotto results? What about the stress of losing your precious ticket
-            in the lead-up to a big draw? Well, why not opt for an SMS results
-            and forecast instead? It is a more comfortable and easier way to
-            reduce your risk of losing that ticket. Subscribe to Expressforecast
-            today to win on the biggest and most lucrative lotteries in Nigeria,
-            all from the comfort of your very own living room. Baba Ijebu,Golden
-            chance Lotto, Ghana Lotto, Lottomania, are just some of the many
-            massive draws on offer.
-          </Text>
-          <Center>
-            <Center
-              backgroundColor="grey"
-              h="50px"
-              width="300px"
-              color="white"
-              cursor="pointer"
-              className={styles.btn}
-            >
-              <Text>MORE {"..."}</Text>
-            </Center>
-          </Center>
-        </Stack>
-      </Center>
-      <Spacer />
-      <Center
-        borderColor="grey"
-        borderWidth="1px"
-        bg="white"
-        w={{ base: "100%", md: "39%", lg: "39%" }}
-        h="500px"
-        borderColor="black"
-        borderWidth="1px"
-        padding="15px"
-        paddingTop="0px"
-      >
-        <Table variant="simple" w="100%">
-          <Thead backgroundColor="red">
-            <Tr>
-              <Th
-                color="white"
-                style={{ textTransform: "capitalize", fontWeight: "unset" }}
-              >
-                <Flex direction="column" align="center">
-                  <Text
-                    fontSize="2xl"
-                    color="white"
-                    fontWeight="bold !important"
-                    marginBottom="10px"
-                  >
-                    View Timetable
-                  </Text>
-                  <Text
-                    fontSize="xl"
-                    color="white"
-                    fontWeight="bold !important"
-                  >
-                    Select Operator
-                  </Text>
-                </Flex>
-              </Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {list.map((x, i) => (
-              <Tr key={i}>
-                <Td>
-                  <Flex direction="row" align="center">
-                    <Image src={x.url1} />
-                    <Spacer />
-                    <Image src={x.url2} />
-                    <Spacer />
-                    <Image src={x.url3} />
-                  </Flex>
-                  <Flex direction="row" align="center">
-                    <Image src={x.url1} />
-                    <Spacer />
-                    <Image src={x.url2} />
-                    <Spacer />
-                    <Image src={x.url3} />
-                  </Flex>
-                  <Flex direction="row" align="center">
-                    <Image src={x.url1} />
-                    <Spacer />
-                    <Image src={x.url2} />
-                    <Spacer />
-                    <Image src={x.url3} />
-                  </Flex>
-                  <Flex direction="row" align="center">
-                    <Image src={x.url1} />
-                    <Spacer />
-                    <Image src={x.url2} />
-                    <Spacer />
-                    <Image src={x.url3} />
-                  </Flex>
-                </Td>
-              </Tr>
-            ))}
-          </Tbody>
-          <Tfoot>
-            <Center>
+    <>
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent minWidth="900px">
+          <ModalHeader color="black">Timetable</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody pb={6}>
+            <Table variant="simple">
+              <Thead bg="red">
+                <Tr>
+                  <Th color="white">Game</Th>
+                  <Th color="white">Day</Th>
+                  <Th color="white">Closing Time</Th>
+                  <Th color="white">Draw Time</Th>
+                </Tr>
+              </Thead>
+              <Tbody>
+                {table.length > 0 ? (
+                  <>
+                    {table.map((x, i) => (
+                      <Tr key={i}>
+                        <Td>{x.game}</Td>
+                        <Td>{x.day}</Td>
+                        <Td>{x.closing_time}</Td>
+                        <Td>{x.draw_time}</Td>
+                      </Tr>
+                    ))}
+                  </>
+                ) : null}
+              </Tbody>
+              {table.length <= 0 ? (
+                <Tfoot>
+                  <Tr>
+                    <Th></Th>
+                    <Th>NO DATA!</Th>
+                    <Th></Th>
+                  </Tr>
+                </Tfoot>
+              ) : null}
+            </Table>
+          </ModalBody>
+
+          <ModalFooter>
+            <Button onClick={onClose}>Cancel</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+      <Flex direction="row" marginTop="10px" wrap="wrap">
+        <Center
+          bg="white"
+          w={{ base: "100%", md: "59%", lg: "59%" }}
+          padding="25px"
+        >
+          <Stack spacing={3}>
+            <Text color="red" fontSize="25px" fontWeight="bolder">
+              {info.Header}
+            </Text>
+            <Text fontSize="20px" fontWeight="thin">
+              {info.Content}
+            </Text>
+            <MotionCenter whileHover={{ scale: 1.025 }}>
               <Center
-                backgroundColor="red"
+                backgroundColor="grey"
                 h="50px"
                 width="300px"
                 color="white"
                 cursor="pointer"
                 className={styles.btn}
               >
-                <Text>MORE ...</Text>
+                <Text>MORE {"..."}</Text>
               </Center>
-            </Center>
-          </Tfoot>
-        </Table>
-      </Center>
-    </Flex>
+            </MotionCenter>
+          </Stack>
+        </Center>
+        <Spacer />
+        <Center
+          bg="white"
+          w={{ base: "100%", md: "39%", lg: "39%" }}
+          h="500px"
+          padding="15px"
+          paddingTop="0px"
+        >
+          <Table variant="simple" w="100%">
+            <Thead backgroundColor="red">
+              <Tr>
+                <Th
+                  color="white"
+                  style={{ textTransform: "capitalize", fontWeight: "unset" }}
+                >
+                  <Flex direction="column" align="center">
+                    <Text
+                      fontSize="2xl"
+                      color="white"
+                      fontWeight="bold !important"
+                      marginBottom="10px"
+                    >
+                      View Timetable
+                    </Text>
+                    <Text
+                      fontSize="xl"
+                      color="white"
+                      fontWeight="bold !important"
+                    >
+                      Select Operator
+                    </Text>
+                  </Flex>
+                </Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              <Tr>
+                <Td>
+                  <Center>
+                    <Grid templateColumns="repeat(3, 1fr)" gap={10}>
+                      {operators.map((x, i) => (
+                        <MotionImage
+                          onClick={async () => {
+                            const { loading, error, data } = await client.query(
+                              {
+                                query: GET_TABLE,
+                                variables: {
+                                  timetablesWhere: {
+                                    operator: {
+                                      Operator: x.Operator,
+                                    },
+                                  },
+                                },
+                              }
+                            );
+                            console.log(data);
+
+                            if (loading) return;
+                            if (error) return;
+
+                            setTable(data.timetables);
+
+                            onOpen();
+                          }}
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.9 }}
+                          cursor="pointer"
+                          key={i}
+                          src={`http://localhost:1337${x.logo.url}`}
+                        />
+                      ))}
+                    </Grid>
+                  </Center>
+                </Td>
+              </Tr>
+            </Tbody>
+            <Tfoot>
+              <MotionCenter whileHover={{ scale: 1.025 }}>
+                <Center
+                  backgroundColor="red"
+                  h="50px"
+                  width="300px"
+                  color="white"
+                  cursor="pointer"
+                  className={styles.btn}
+                >
+                  <Text>MORE ...</Text>
+                </Center>
+              </MotionCenter>
+            </Tfoot>
+          </Table>
+        </Center>
+      </Flex>
+    </>
   );
 }

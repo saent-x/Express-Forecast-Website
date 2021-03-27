@@ -9,6 +9,10 @@ import {
   HStack,
 } from "@chakra-ui/react";
 import Carousel from "react-multi-carousel";
+import { motion } from "framer-motion";
+
+const MotionImage = motion(Image);
+const MotionText = motion(Text);
 
 const responsive = {
   superLargeDesktop: {
@@ -57,6 +61,7 @@ export default function Jumbotron() {
           <Center
             mr={{ base: "0px", md: "5px", lg: "5px" }}
             mt={{ base: "0px", md: "10px", lg: "10px" }}
+            boxShadow="sm"
             bg="red"
             w="100%"
             h="350px"
@@ -92,41 +97,79 @@ export default function Jumbotron() {
           <Center
             ml={{ base: "0px", md: "5px", lg: "5px" }}
             mt={{ base: "0px", md: "10px", lg: "10px" }}
-            borderColor="grey"
-            borderWidth="1px"
+            boxShadow="sm"
             bg="white"
             w="100%"
             h="350px"
           >
             <Stack spacing={3} align="center">
-              <Text p="5px" color="white" bg="red" fontSize="3xl" fontWeight="bold">
+              <Text
+                p="5px"
+                color="white"
+                bg="red"
+                fontSize="3xl"
+                fontWeight="bold"
+              >
                 Know your lotto Terms
               </Text>
               <Divider borderColor="red" />
               <Flex>
                 <HStack spacing={6}>
-                  <a href="#">
-                    <Text fontSize="xl" color="red">
+                  <a href="#" style={{ color:"red" }}>
+                    <MotionText
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                      cursor="pointer"
+                      fontSize="xl"
+                      color="red"
+                    >
                       Perming
-                    </Text>
+                    </MotionText>
                   </a>
-                  <a href="#">
-                    <Text fontSize="xl" color="red">
+                  <a href="#" style={{ color:"red" }}>
+                    <MotionText
+                      fontSize="xl"
+                      color="red"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                      cursor="pointer"
+                    >
                       2Sure
-                    </Text>
+                    </MotionText>
                   </a>
-                  <a href="#">
-                    <Text fontSize="xl" color="red">
+                  <a href="#" style={{ color:"red" }}>
+                    <MotionText
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                      cursor="pointer"
+                      fontSize="xl"
+                      color="red"
+                    >
                       Against
-                    </Text>
+                    </MotionText>
                   </a>
                 </HStack>
               </Flex>
               <Divider borderColor="red" />
               <HStack spacing={6}>
-                <Image src="../1.png" />
-                <Image src="../2.png" />
-                <Image src="../3.png" />
+                <MotionImage
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  cursor="pointer"
+                  src="../1.png"
+                />
+                <MotionImage
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  cursor="pointer"
+                  src="../2.png"
+                />
+                <MotionImage
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  cursor="pointer"
+                  src="../3.png"
+                />
               </HStack>
             </Stack>
           </Center>

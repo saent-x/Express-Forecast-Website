@@ -1,0 +1,20 @@
+{
+  "kind": "singleType",
+  "collectionName": "homepage_descriptions",
+  "info": {
+    "name": "Homepage Description"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Header": {
+      "type": "string"
+    },
+    "Content": {
+      "type": "text"
+    }
+  }
+}

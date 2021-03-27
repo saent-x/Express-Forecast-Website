@@ -1,0 +1,25 @@
+{
+  "kind": "singleType",
+  "collectionName": "advert_gifs",
+  "info": {
+    "name": "Advert GIF"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Advert": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false
+    }
+  }
+}

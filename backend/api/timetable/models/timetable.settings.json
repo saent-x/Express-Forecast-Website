@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "timetables",
+  "info": {
+    "name": "Timetable",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "game": {
+      "type": "string"
+    },
+    "day": {
+      "type": "date"
+    },
+    "closing_time": {
+      "type": "time"
+    },
+    "draw_time": {
+      "type": "time"
+    },
+    "operator": {
+      "model": "game-timetable",
+      "via": "timetables"
+    }
+  }
+}

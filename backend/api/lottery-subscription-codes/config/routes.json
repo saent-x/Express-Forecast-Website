@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/lottery-subscription-codes",
+      "handler": "lottery-subscription-codes.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/lottery-subscription-codes/count",
+      "handler": "lottery-subscription-codes.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/lottery-subscription-codes/:id",
+      "handler": "lottery-subscription-codes.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/lottery-subscription-codes",
+      "handler": "lottery-subscription-codes.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/lottery-subscription-codes/:id",
+      "handler": "lottery-subscription-codes.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/lottery-subscription-codes/:id",
+      "handler": "lottery-subscription-codes.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

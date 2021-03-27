@@ -11,6 +11,7 @@ import {
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 import { motion } from "framer-motion";
+import moment from "moment";
 
 const MotionButton = motion(Button);
 const MotionCenter = motion(Center);
@@ -35,6 +36,18 @@ export default function GameTimer() {
 
   const gameTimes = data.games;
 
+//   console.log(
+//     "Time: ",
+//     moment.duration(gameTimes[0].game_time, "HH:mm:ss: A").asSeconds()
+//   );
+
+//   const now = moment().format("HH:mm:ss: A");
+// console.log(now)
+//   console.log(
+//     "Now: ",
+//     moment.duration(now, "HH:mm:ss: A").asSeconds()
+//   );
+
   return (
     <Flex
       direction="row"
@@ -58,7 +71,7 @@ export default function GameTimer() {
           paddingBottom="20px"
         >
           <VStack>
-            <Image src={`http://localhost:1337${x.game_logo.url}`} />
+            <Image src={`${x.game_logo.url}`} />
             <Divider marginTop="10px" borderColor="red" w="70%" />
             <Text fontSize="lg" fontWeight="bold" color="red">
               {x.name}

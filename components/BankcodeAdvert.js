@@ -80,7 +80,7 @@ export default function BankcodeAdvert() {
         w={{ base: "100%", md: "39%", lg: "39%" }}
         h="316.88px"
       >
-        <Image src={`http://localhost:1337${data.advertGif.Advert.url}`} />
+        <Image src={`${data.advertGif.Advert.url}`} />
       </Center>
     </Flex>
   );

@@ -69,10 +69,10 @@ export default function Footer() {
         />
         <Stack spacing={3} padding="30px" wrap="wrap">
           <Text color="white" fontSize="25px" fontWeight="bolder">
-            {data.footerHeadline1.header}
+            {data.footerHeadline2.header}
           </Text>
           <Text fontSize="20px" fontWeight="thin" color="white">
-            {data.footerHeadline1.content}
+            {data.footerHeadline2.content}
           </Text>
         </Stack>
         <Divider
@@ -87,10 +87,10 @@ export default function Footer() {
         />
         <Stack spacing={3} padding="30px" wrap="wrap">
           <Text color="white" fontSize="25px" fontWeight="bolder">
-            {data.footerHeadline1.header}
+            {data.footerHeadline3.header}
           </Text>
           <Text fontSize="20px" fontWeight="thin" color="white">
-            {data.footerHeadline1.content}
+            {data.footerHeadline3.content}
           </Text>
         </Stack>
       </Flex>
@@ -114,7 +114,7 @@ export default function Footer() {
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                   cursor="pointer"
-                  src={`http://localhost:1337${x.image.url}`}
+                  src={`${x.image.url}`}
                 />
                 <Spacer />
               </>

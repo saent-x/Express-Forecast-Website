@@ -33,7 +33,6 @@ export default function LotterySuscriptionTable() {
   if (error) return "Error loading... contact Admin";
   if (loading) return <h1>...</h1>;
 
-
   const list = data.lotterySubscriptionCodes;
 
   const fullList = [];
@@ -54,7 +53,7 @@ export default function LotterySuscriptionTable() {
             <Tr key={i}>
               <Td>
                 <Flex direction="row" align="center">
-                  <Image src={`http://localhost:1337${x.logo.url}`} />
+                  <Image src={`${x.logo.url}`} />
                   <Text
                     marginLeft="15px"
                     fontSize="xl"

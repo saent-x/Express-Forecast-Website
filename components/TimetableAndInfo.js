@@ -224,7 +224,7 @@ export default function TimetableAndInfo() {
                           whileTap={{ scale: 0.9 }}
                           cursor="pointer"
                           key={i}
-                          src={`http://localhost:1337${x.logo.url}`}
+                          src={`${x.logo.url}`}
                         />
                       ))}
                     </Grid>

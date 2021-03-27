@@ -63,7 +63,11 @@ export default function Header() {
   if (loading) return <h1>...</h1>;
 
   const subscribe = () => {
-    if (subscriber.name.trim() === "" || subscriber.email.trim() === "" || subscriber.phone < 0) {
+    if (
+      subscriber.name.trim() === "" ||
+      subscriber.email.trim() === "" ||
+      subscriber.phone < 0
+    ) {
       toast.info("Fill in the boxes!!", {
         position: "top-right",
         autoClose: 5000,
@@ -77,22 +81,22 @@ export default function Header() {
       variables: {
         createNewsletterSubscriberInput: {
           data: {
-            ...subscriber
+            ...subscriber,
           },
         },
       },
     })
       .then((result) => {
-          setTimeout(async () => {
-            setSaving(false);
-            toast.success("Successful!! 😃", {
-              position: "top-right",
-              autoClose: 5000,
-              closeOnClick: true,
-              progress: undefined,
-            });
-            onClose()
-          }, 2000);
+        setTimeout(async () => {
+          setSaving(false);
+          toast.success("Successful!! 😃", {
+            position: "top-right",
+            autoClose: 5000,
+            closeOnClick: true,
+            progress: undefined,
+          });
+          onClose();
+        }, 2000);
       })
       .catch((error) => {
         setSaving(false);
@@ -117,7 +121,7 @@ export default function Header() {
         <ModalOverlay />
         <ModalContent>
           <Image
-            src={`http://localhost:1337${data.newsletterBackground.background.url}`}
+            src={`${data.newsletterBackground.background.url}`}
             h="100%"
             w="100%"
             position="absolute"
@@ -178,7 +182,7 @@ export default function Header() {
         <Navbar.Brand href="#home">
           <img
             alt=""
-            src={`http://localhost:1337${data.logo.logo_file.url}`}
+            src={`${data.logo.logo_file.url}`}
             width="150"
             height="100"
             className="d-inline-block align-top"

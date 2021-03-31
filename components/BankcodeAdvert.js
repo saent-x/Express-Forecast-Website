@@ -43,7 +43,7 @@ export default function BankcodeAdvert() {
               justifySelf="flex-start"
             ></Center>
             <Center
-              bg="red"
+              bg="white"
               h="50px"
               w={{ base: "100%", md: "40%", lg: "40%" }}
             >

@@ -10,6 +10,19 @@ import {
 } from "@chakra-ui/react";
 import Carousel from "react-multi-carousel";
 import { motion } from "framer-motion";
+import Link from "next/link";
+import { useQuery } from "@apollo/react-hooks";
+import { gql } from "apollo-boost";
+
+const QUERY = gql`
+  {
+    slideShows {
+      image {
+        url
+      }
+    }
+  }
+`;
 
 const MotionImage = motion(Image);
 const MotionText = motion(Text);
@@ -35,13 +48,17 @@ const responsive = {
 };
 
 export default function Jumbotron() {
+  const { loading, error, data } = useQuery(QUERY);
+  if (error) return "Error loading... contact Admin";
+  if (loading) return <h1>...</h1>;
+  
   return (
     <Carousel
       responsive={responsive}
       swipeable={false}
       draggable={false}
       showDots={true}
-      // autoPlay={true}
+      autoPlay={true}
       responsive={responsive}
       ssr={true} // means to render carousel on server-side.
       infinite={true}
@@ -115,39 +132,47 @@ export default function Jumbotron() {
               <Divider borderColor="red" />
               <Flex>
                 <HStack spacing={6}>
-                  <a href="#" style={{ color:"red" }}>
-                    <MotionText
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
-                      cursor="pointer"
-                      fontSize="xl"
-                      color="red"
-                    >
-                      Perming
-                    </MotionText>
-                  </a>
-                  <a href="#" style={{ color:"red" }}>
-                    <MotionText
-                      fontSize="xl"
-                      color="red"
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
-                      cursor="pointer"
-                    >
-                      2Sure
-                    </MotionText>
-                  </a>
-                  <a href="#" style={{ color:"red" }}>
-                    <MotionText
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
-                      cursor="pointer"
-                      fontSize="xl"
-                      color="red"
-                    >
-                      Against
-                    </MotionText>
-                  </a>
+                  <Link href="/howtoplay#perming">
+                    <a style={{ color: "red" }}>
+                      <MotionText
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                        cursor="pointer"
+                        fontSize="xl"
+                        color="red"
+                      >
+                        Perming
+                      </MotionText>
+                    </a>
+                  </Link>
+
+                  <Link href="/howtoplay#2sure">
+                    <a style={{ color: "red" }}>
+                      <MotionText
+                        fontSize="xl"
+                        color="red"
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                        cursor="pointer"
+                      >
+                        2Sure
+                      </MotionText>
+                    </a>
+                  </Link>
+
+                  <Link href="/howtoplay#against">
+                    <a style={{ color: "red" }}>
+                      <MotionText
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                        cursor="pointer"
+                        fontSize="xl"
+                        color="red"
+                      >
+                        Against
+                      </MotionText>
+                    </a>
+                  </Link>
                 </HStack>
               </Flex>
               <Divider borderColor="red" />
@@ -175,9 +200,9 @@ export default function Jumbotron() {
           </Center>
         </Flex>
       </div>
-      <div>Item 2</div>
-      <div>Item 3</div>
-      <div>Item 4</div>
+      {data.slideShows.map((x, i) => (
+        <Image key={i} src={`${x.image[0].url}`} h={{base: "350px", md: "350px", lg: "350px", sm: "100%"}} w="100%" />
+      ))}
     </Carousel>
   );
 }

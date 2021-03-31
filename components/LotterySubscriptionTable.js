@@ -35,10 +35,6 @@ export default function LotterySuscriptionTable() {
 
   const list = data.lotterySubscriptionCodes;
 
-  const fullList = [];
-
-  const showFullList = () => {};
-
   return (
     <div style={{ overflowX: "auto" }}>
       <Table variant="simple" marginTop="10px" bg="white">

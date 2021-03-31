@@ -1,10 +1,21 @@
 import styles from "../styles/Layout.module.css";
-import { Container } from "@chakra-ui/react";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import BottomInfo from "../components/BottomInfo";
+import { ChakraProvider } from "@chakra-ui/react";
 
 export default function Layout(props) {
   return (
-    <div className={styles.layout}>
-      {props.children}
-    </div>
+    <ChakraProvider>
+      <div className={styles.layout}>
+        <Header />
+        {props.children}
+        <footer className={styles.footer}>
+          <Footer />
+          <BottomInfo />
+          <br />
+        </footer>
+      </div>
+    </ChakraProvider>
   );
 }

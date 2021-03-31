@@ -10,6 +10,7 @@ import {
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const MotionImage = motion(Image);
 
@@ -31,6 +32,7 @@ const QUERY = gql`
       image {
         url
       }
+      link
     }
   }
 `;
@@ -59,8 +61,8 @@ export default function Footer() {
         </Stack>
         <Divider
           orientation={{ base: "horizontal", md: "vertical", lg: "vertical" }}
-          h={{ base: "0px", md: "400px", lg: "400px" }}
-          w={{ base: "400px", md: "0px", lg: "0px" }}
+          h={{ base: "0px", md: "300px", lg: "300px" }}
+          w={{ base: "300px", md: "0px", lg: "0px" }}
           ml={{ base: "50px", md: "0px", lg: "0px" }}
           mr={{ base: "50px", md: "0px", lg: "0px" }}
           mt="50px"
@@ -77,8 +79,8 @@ export default function Footer() {
         </Stack>
         <Divider
           orientation={{ base: "horizontal", md: "vertical", lg: "vertical" }}
-          h={{ base: "0px", md: "400px", lg: "400px" }}
-          w={{ base: "400px", md: "0px", lg: "0px" }}
+          h={{ base: "0px", md: "300px", lg: "300px" }}
+          w={{ base: "300px", md: "0px", lg: "0px" }}
           ml={{ base: "50px", md: "0px", lg: "0px" }}
           mr={{ base: "50px", md: "0px", lg: "0px" }}
           mt="50px"
@@ -105,34 +107,36 @@ export default function Footer() {
           >
             Join Our Community
           </Text>
-          <Flex direction="row" wrap="wrap">
-            <Spacer />
+          <Flex direction="row" wrap="wrap" align="center" justify="center">
             {data.socials.map((x, i) => (
-              <>
-                <MotionImage
-                  key={i}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  cursor="pointer"
-                  src={`${x.image.url}`}
-                />
-                <Spacer />
-              </>
+              <div key={i}>
+                <Link href={`${x.link}`}>
+                  <MotionImage
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    cursor="pointer"
+                    src={`${x.image.url}`}
+                    m="10px"
+                  />
+                </Link>
+              </div>
             ))}
           </Flex>
         </Stack>
       </Center>
 
-      <Flex justify="center" align="center" direction="row" mt="30px">
+      <Flex justify="center" align="center" direction="row" mt="30px" mb="10px">
         <ul className="ulist2">
           <li style={{ marginLeft: "0px" }}>
-            <a href="#" fontSize="30px">
-              Terms {"&"} Conditions
-            </a>
+            <Link href="termsconditions">
+              <a>Terms {"&"} Conditions</a>
+            </Link>
           </li>
           |
           <li>
-            <a href="#">Privacy Policy</a>
+            <Link href="privacypolicy">
+              <a>Privacy Policy</a>
+            </Link>
           </li>
           |
           <li>
@@ -140,7 +144,9 @@ export default function Footer() {
           </li>
           |
           <li>
-            <a href="#">Disclaimer</a>
+            <Link href="disclaimer">
+              <a>Disclaimer</a>
+            </Link>
           </li>
           |
           <li>
@@ -148,7 +154,9 @@ export default function Footer() {
           </li>
           |
           <li>
-            <a href="#">FAQ</a>
+            <Link href="faqs">
+              <a>FAQS</a>
+            </Link>{" "}
           </li>
         </ul>
       </Flex>

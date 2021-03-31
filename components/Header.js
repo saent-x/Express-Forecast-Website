@@ -19,6 +19,7 @@ import { useQuery, useMutation } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
+import { useRouter } from "next/router";
 
 const QUERY = gql`
   {
@@ -50,6 +51,7 @@ const ADD_SUBSCRIBER = gql`
 `;
 
 export default function Header() {
+  const router = useRouter();
   const [subscriber, setSubscriber] = useState({
     name: "",
     email: "",
@@ -61,6 +63,7 @@ export default function Header() {
   const { loading, error, data } = useQuery(QUERY);
   if (error) return "Error loading... contact Admin";
   if (loading) return <h1>...</h1>;
+
 
   const subscribe = () => {
     if (
@@ -194,11 +197,17 @@ export default function Header() {
             <Nav.Link className={styles.link} href="/">
               Home
             </Nav.Link>
-            <Nav.Link className={styles.link} href="#pricing">
-              How to play
+            <Nav.Link
+              className={styles.link}
+              onClick={() => router.push("/howtoplay")}
+            >
+              How to play lotto
             </Nav.Link>
-            <Nav.Link className={styles.link} href="#pricing">
-              Contact us
+            <Nav.Link
+              className={styles.link}
+              onClick={() => router.push("/contact")}
+            >
+              Contact Us
             </Nav.Link>
           </Nav>
           <Nav>

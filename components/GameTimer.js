@@ -12,6 +12,8 @@ import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 import { motion } from "framer-motion";
 import moment from "moment";
+import Countdown from "react-countdown";
+import { useRouter } from "next/router";
 
 const MotionButton = motion(Button);
 const MotionCenter = motion(Center);
@@ -25,28 +27,26 @@ const QUERY = gql`
       name
       type
       game_time
+      link
     }
   }
 `;
 
 export default function GameTimer() {
+  const router = useRouter();
   const { loading, error, data } = useQuery(QUERY);
   if (error) return "Error loading... contact Admin";
   if (loading) return <h1>...</h1>;
-
+  
   const gameTimes = data.games;
 
-//   console.log(
-//     "Time: ",
-//     moment.duration(gameTimes[0].game_time, "HH:mm:ss: A").asSeconds()
-//   );
+  const getMilliseconds = (gameTime) => {
+    const date = new Date(gameTime);
+    const now = Date.now();
 
-//   const now = moment().format("HH:mm:ss: A");
-// console.log(now)
-//   console.log(
-//     "Now: ",
-//     moment.duration(now, "HH:mm:ss: A").asSeconds()
-//   );
+    const miliseconds_countdown = date - now;
+    return now + miliseconds_countdown;
+  };
 
   return (
     <Flex
@@ -69,6 +69,7 @@ export default function GameTimer() {
           key={i}
           margin="10px"
           paddingBottom="20px"
+          pt="20px"
         >
           <VStack>
             <Image src={`${x.game_logo.url}`} />
@@ -84,13 +85,14 @@ export default function GameTimer() {
               TIME TO DRAW
             </Text>
             <Text fontSize="xl" fontWeight="bold" color="black">
-              {x.game_time}
+              <Countdown date={getMilliseconds(x.game_time)} />
             </Text>
             <MotionButton
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               colorScheme="red"
               size="lg"
+              onClick={() => router.push(x.link)}
             >
               Play Now
             </MotionButton>

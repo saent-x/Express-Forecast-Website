@@ -21,6 +21,11 @@ const QUERY = gql`
         url
       }
     }
+    primaryBanner{
+    banner_background{
+      url
+    }
+  }
   }
 `;
 
@@ -63,7 +68,7 @@ export default function Jumbotron() {
       ssr={true} // means to render carousel on server-side.
       infinite={true}
       keyBoardControl={true}
-      customTransition="all .5"
+      customTransition="all 3.0"
       transitionDuration={500}
       containerClass="carousel-container"
       removeArrowOnDeviceType={["tablet", "mobile"]}
@@ -73,6 +78,7 @@ export default function Jumbotron() {
       <div>
         <Flex
           direction="row"
+          w="100%"
           wrap={{ base: "wrap", md: "nowrap", lg: "nowrap" }}
         >
           <Center
@@ -83,6 +89,7 @@ export default function Jumbotron() {
             w="100%"
             h="350px"
             borderRadius={{ base: "0px", md: "0px", lg: "56px", sm: "0px" }}
+            backgroundImage={`url('${data.primaryBanner.banner_background.url}')`}
           >
             <Stack spacing={3} align="center">
               <Text
@@ -109,9 +116,11 @@ export default function Jumbotron() {
               </Text>
             </Stack>
           </Center>
-          <Spacer />
-
-          <Center
+         
+        </Flex>
+      </div>
+      <div>
+         <Center
             ml={{ base: "0px", md: "5px", lg: "5px" }}
             mt={{ base: "0px", md: "10px", lg: "10px" }}
             boxShadow="sm"
@@ -198,7 +207,6 @@ export default function Jumbotron() {
               </HStack>
             </Stack>
           </Center>
-        </Flex>
       </div>
       {data.slideShows.map((x, i) => (
         <Image key={i} src={`${x.image[0].url}`} h={{base: "350px", md: "350px", lg: "350px", sm: "100%"}} w="100%" />

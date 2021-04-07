@@ -130,10 +130,10 @@ export default function TimetableAndInfo() {
         </ModalContent>
       </Modal>
       <Flex direction="row" marginTop="10px" wrap="wrap">
-        <Center
+        <Flex
           bg="white"
           w={{ base: "100%", md: "59%", lg: "59%" }}
-          padding="25px"
+          padding="30px"
         >
           <Stack spacing={3}>
             <Text color="red" fontSize="25px" fontWeight="bolder">
@@ -142,7 +142,7 @@ export default function TimetableAndInfo() {
             <Text fontSize="20px" fontWeight="thin">
               {info.Content}
             </Text>
-            <MotionCenter whileHover={{ scale: 1.025 }}>
+            {/* <MotionCenter whileHover={{ scale: 1.025 }}>
               <Center
                 backgroundColor="grey"
                 h="50px"
@@ -153,16 +153,15 @@ export default function TimetableAndInfo() {
               >
                 <Text>MORE {"..."}</Text>
               </Center>
-            </MotionCenter>
+            </MotionCenter> */}
           </Stack>
-        </Center>
+        </Flex>
         <Spacer />
-        <Center
+        <Flex
           bg="white"
           w={{ base: "100%", md: "39%", lg: "39%" }}
           h="500px"
-          padding="15px"
-          paddingTop="0px"
+          padding="30px"
         >
           <Table variant="simple" w="100%">
             <Thead backgroundColor="red">
@@ -233,7 +232,7 @@ export default function TimetableAndInfo() {
               </Tr>
             </Tbody>
             <Tfoot>
-              <MotionCenter whileHover={{ scale: 1.025 }}>
+              {/* <MotionCenter whileHover={{ scale: 1.025 }}>
                 <Center
                   backgroundColor="red"
                   h="50px"
@@ -244,10 +243,10 @@ export default function TimetableAndInfo() {
                 >
                   <Text>MORE ...</Text>
                 </Center>
-              </MotionCenter>
+              </MotionCenter> */}
             </Tfoot>
           </Table>
-        </Center>
+        </Flex>
       </Flex>
     </>
   );

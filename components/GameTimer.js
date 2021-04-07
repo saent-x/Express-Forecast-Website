@@ -20,16 +20,19 @@ const MotionCenter = motion(Center);
 
 const QUERY = gql`
   {
-    games {
-      game_logo {
+    timetables {
+    game
+    day
+    draw_time
+    link
+    operator{
+      Operator
+      logo{
         url
       }
-      name
-      type
-      game_time
-      link
     }
   }
+}
 `;
 
 export default function GameTimer() {
@@ -38,13 +41,15 @@ export default function GameTimer() {
   if (error) return "Error loading... contact Admin";
   if (loading) return <h1>...</h1>;
   
-  const gameTimes = data.games;
+  const day = moment().format('dddd');
+  const gameTimes = data.timetables.filter(x => x.day.toLocaleLowerCase() === day.toLocaleLowerCase());
 
   const getMilliseconds = (gameTime) => {
-    const date = new Date(gameTime);
+    const date = moment(gameTime, "hh:mm:ss").toDate().valueOf();
     const now = Date.now();
 
     const miliseconds_countdown = date - now;
+    console.log(now + miliseconds_countdown)
     return now + miliseconds_countdown;
   };
 
@@ -72,20 +77,20 @@ export default function GameTimer() {
           pt="20px"
         >
           <VStack>
-            <Image src={`${x.game_logo.url}`} />
+            <Image src={`${x.operator.logo.url}`} />
             <Divider marginTop="10px" borderColor="red" w="70%" />
-            <Text fontSize="lg" fontWeight="bold" color="red">
-              {x.name}
+            <Text textTransform="uppercase" fontSize="lg" fontWeight="bold" color="red">
+              NEXT {" "}{x.operator.Operator} {" "} GAME
             </Text>
             <Divider borderColor="red" w="70%" />
             <Text fontSize="4xl" fontWeight="extrabold" color="red">
-              {x.type}
+              {x.game}
             </Text>
             <Text fontSize="xl" fontWeight="bold" color="black">
               TIME TO DRAW
             </Text>
             <Text fontSize="xl" fontWeight="bold" color="black">
-              <Countdown date={getMilliseconds(x.game_time)} />
+              <Countdown date={getMilliseconds(x.draw_time)} />
             </Text>
             <MotionButton
               whileHover={{ scale: 1.1 }}

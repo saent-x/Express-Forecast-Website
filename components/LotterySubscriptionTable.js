@@ -74,7 +74,7 @@ export default function LotterySuscriptionTable() {
           ))}
         </Tbody>
         <Tfoot>
-          <Center
+          {/* <Center
             backgroundColor="grey"
             h="50px"
             width="300px"
@@ -83,7 +83,7 @@ export default function LotterySuscriptionTable() {
             className={styles.btn}
           >
             <Text>CLICK HERE FOR MORE CODES {">>"}</Text>
-          </Center>
+          </Center> */}
         </Tfoot>
       </Table>
     </div>

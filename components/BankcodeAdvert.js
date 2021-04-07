@@ -35,17 +35,10 @@ export default function BankcodeAdvert() {
     <Flex direction="row" marginTop="10px" wrap="wrap">
       <Box bg="red" w={{ base: "100%", md: "59%", lg: "59%" }} h="316.88px">
         <Stack spacing={3}>
-          <Flex direction="row">
             <Center
               bg="white"
               h="50px"
-              w={{ base: "0px", md: "60%", lg: "60%" }}
-              justifySelf="flex-start"
-            ></Center>
-            <Center
-              bg="white"
-              h="50px"
-              w={{ base: "100%", md: "40%", lg: "40%" }}
+              w="100%"
             >
               <Text
                 p="5px"
@@ -57,7 +50,6 @@ export default function BankcodeAdvert() {
                 KNOW YOUR BANK CODES
               </Text>
             </Center>
-          </Flex>
 
           <div style={{ padding: "20px", paddingTop: "10px" }}>
             {codeList.map((x, i) => (

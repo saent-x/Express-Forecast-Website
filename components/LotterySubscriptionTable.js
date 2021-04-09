@@ -49,10 +49,10 @@ export default function LotterySuscriptionTable() {
             <Tr key={i}>
               <Td>
                 <Flex direction="row" align="center">
-                  <Image src={`${x.logo.url}`} />
+                  <Image boxSize={{ base: "50px", lg: "70px", sm: "50px"}} src={`${x.logo.url}`} />
                   <Text
                     marginLeft="15px"
-                  fontSize={{base: "sm", md: "xl", lg: "lg", sm: "sm"}}
+                    fontSize={{ base: "sm", md: "xl", lg: "lg", sm: "sm" }}
                     color="red"
                     fontWeight="bold"
                   >
@@ -63,7 +63,7 @@ export default function LotterySuscriptionTable() {
               <Td>
                 <Text
                   marginLeft="15px"
-                  fontSize={{base: "sm", md: "xl", lg: "lg", sm: "sm"}}
+                  fontSize={{ base: "sm", md: "xl", lg: "lg", sm: "sm" }}
                   color="red"
                   fontWeight="bold"
                 >

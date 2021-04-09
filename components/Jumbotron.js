@@ -79,8 +79,8 @@ export default function Jumbotron() {
       swipeable={false}
       draggable={false}
       showDots={true}
-      // autoPlay={true}
-      // autoPlaySpeed={3000}
+      autoPlay={true}
+      autoPlaySpeed={3000}
       responsive={responsive}
       ssr={true} // means to render carousel on server-side.
       infinite={true}

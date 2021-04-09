@@ -57,11 +57,21 @@ const responsive = {
 };
 
 export default function Jumbotron() {
-  const value = useBreakpointValue({ base: "base", md: "md",lg: "lq",sm: "sm" })
+  const value = useBreakpointValue({
+    base: "sm",
+    md: "md",
+    lg: "lg",
+    sm: "sm",
+  });
 
   const { loading, error, data } = useQuery(QUERY);
   if (error) return "Error loading... contact Admin";
   if (loading) return <h1>...</h1>;
+
+  const view = (x) => {
+    console.log(value);
+    return value === "sm" ? `${x.mobile.url}` : `${x.image.url}`;
+  }
 
   return (
     <Carousel
@@ -69,8 +79,8 @@ export default function Jumbotron() {
       swipeable={false}
       draggable={false}
       showDots={true}
-      autoPlay={true}
-      autoPlaySpeed={3000}
+      // autoPlay={true}
+      // autoPlaySpeed={3000}
       responsive={responsive}
       ssr={true} // means to render carousel on server-side.
       infinite={true}
@@ -216,7 +226,7 @@ export default function Jumbotron() {
           </Center>
       </div>
       {data.slideShows.map((x, i) => (
-        <Image key={i} src={value === "sm" ? `${x.mobile.url}` : `${x.image.url}`} h="350px" w="100%" />
+        <Image key={i} src={view(x)} h="350px" w="100%" />
       ))}
     </Carousel>
   );

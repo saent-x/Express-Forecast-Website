@@ -128,6 +128,7 @@ export default function Header() {
             h="100%"
             w="100%"
             position="absolute"
+
           />
           <ModalHeader color="black">Subscribe</ModalHeader>
           <ModalCloseButton />
@@ -182,7 +183,7 @@ export default function Header() {
         bg="dark"
         variant="dark"
       >
-        <Navbar.Brand href="#home">
+        <Navbar.Brand href="/">
           <img
             alt=""
             src={`${data.logo.logo_file.url}`}

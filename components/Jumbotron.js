@@ -13,11 +13,15 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
+import { useBreakpointValue } from "@chakra-ui/react";
 
 const QUERY = gql`
   {
     slideShows {
       image {
+        url
+      }
+      mobile{
         url
       }
     }
@@ -53,10 +57,12 @@ const responsive = {
 };
 
 export default function Jumbotron() {
+  const value = useBreakpointValue({ base: "base", md: "md",lg: "lq",sm: "sm" })
+
   const { loading, error, data } = useQuery(QUERY);
   if (error) return "Error loading... contact Admin";
   if (loading) return <h1>...</h1>;
-  
+
   return (
     <Carousel
       responsive={responsive}
@@ -64,11 +70,12 @@ export default function Jumbotron() {
       draggable={false}
       showDots={true}
       autoPlay={true}
+      autoPlaySpeed={3000}
       responsive={responsive}
       ssr={true} // means to render carousel on server-side.
       infinite={true}
       keyBoardControl={true}
-      customTransition="all 3.0"
+      customTransition="all .5"
       transitionDuration={500}
       containerClass="carousel-container"
       removeArrowOnDeviceType={["tablet", "mobile"]}
@@ -209,7 +216,7 @@ export default function Jumbotron() {
           </Center>
       </div>
       {data.slideShows.map((x, i) => (
-        <Image key={i} src={`${x.image[0].url}`} h={{base: "350px", md: "350px", lg: "350px", sm: "100%"}} w="100%" />
+        <Image key={i} src={value === "sm" ? `${x.mobile.url}` : `${x.image.url}`} h="350px" w="100%" />
       ))}
     </Carousel>
   );

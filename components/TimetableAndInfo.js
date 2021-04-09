@@ -160,7 +160,7 @@ export default function TimetableAndInfo() {
         <Flex
           bg="white"
           w={{ base: "100%", md: "39%", lg: "39%" }}
-          h="500px"
+          h={{base: "500px", lg: "500px", md: "500px", sm: "100%"}}
           padding="30px"
         >
           <Table variant="simple" w="100%">
@@ -210,7 +210,6 @@ export default function TimetableAndInfo() {
                                 },
                               }
                             );
-                            console.log(data);
 
                             if (loading) return;
                             if (error) return;

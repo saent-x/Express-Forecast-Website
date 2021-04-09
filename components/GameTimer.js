@@ -42,14 +42,24 @@ export default function GameTimer() {
   if (loading) return <h1>...</h1>;
   
   const day = moment().format('dddd');
-  const gameTimes = data.timetables.filter(x => x.day.toLocaleLowerCase() === day.toLocaleLowerCase());
+  let gameTimes = data.timetables.filter(x => x.day.toLocaleLowerCase() === day.toLocaleLowerCase());
+
+
+  const filterCountdown = (gameTime) => {
+    const date = moment(gameTime, "hh:mm:ss").toDate().valueOf();
+    const now = Date.now();
+
+    const miliseconds_countdown = date - now;
+    return miliseconds_countdown < 0;
+  }
+
+  gameTimes = gameTimes.filter(x => filterCountdown(x.draw_time) === false);
 
   const getMilliseconds = (gameTime) => {
     const date = moment(gameTime, "hh:mm:ss").toDate().valueOf();
     const now = Date.now();
 
     const miliseconds_countdown = date - now;
-    console.log(now + miliseconds_countdown)
     return now + miliseconds_countdown;
   };
 
@@ -83,7 +93,7 @@ export default function GameTimer() {
               NEXT {" "}{x.operator.Operator} {" "} GAME
             </Text>
             <Divider borderColor="red" w="70%" />
-            <Text fontSize="4xl" fontWeight="extrabold" color="red">
+            <Text fontSize="2xl" fontWeight="extrabold" color="red">
               {x.game}
             </Text>
             <Text fontSize="xl" fontWeight="bold" color="black">

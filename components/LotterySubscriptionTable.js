@@ -52,7 +52,7 @@ export default function LotterySuscriptionTable() {
                   <Image src={`${x.logo.url}`} />
                   <Text
                     marginLeft="15px"
-                    fontSize="xl"
+                  fontSize={{base: "xl", md: "xl", lg: "lg", sm: "sm"}}
                     color="red"
                     fontWeight="bold"
                   >
@@ -63,7 +63,7 @@ export default function LotterySuscriptionTable() {
               <Td>
                 <Text
                   marginLeft="15px"
-                  fontSize="xl"
+                  fontSize={{base: "xl", md: "xl", lg: "lg", sm: "sm"}}
                   color="red"
                   fontWeight="bold"
                 >

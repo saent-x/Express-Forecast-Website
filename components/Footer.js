@@ -139,10 +139,10 @@ export default function Footer() {
             </Link>
           </li>
           |
-          <li>
+          {/* <li>
             <a href="#">Site Map</a>
-          </li>
-          |
+          </li> */}
+          
           <li>
             <Link href="disclaimer">
               <a>Disclaimer</a>

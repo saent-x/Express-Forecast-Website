@@ -21,15 +21,15 @@ const QUERY = gql`
       image {
         url
       }
-      mobile{
+      mobile {
         url
       }
     }
-    primaryBanner{
-    banner_background{
-      url
+    primaryBanner {
+      banner_background {
+        url
+      }
     }
-  }
   }
 `;
 
@@ -69,9 +69,8 @@ export default function Jumbotron() {
   if (loading) return <h1>...</h1>;
 
   const view = (x) => {
-    console.log(value);
     return value === "sm" ? `${x.mobile.url}` : `${x.image.url}`;
-  }
+  };
 
   return (
     <Carousel
@@ -80,13 +79,13 @@ export default function Jumbotron() {
       draggable={false}
       showDots={true}
       autoPlay={true}
-      autoPlaySpeed={3000}
+      autoPlaySpeed={7000}
       responsive={responsive}
       ssr={true} // means to render carousel on server-side.
       infinite={true}
       keyBoardControl={true}
       customTransition="all .5"
-      transitionDuration={500}
+      transitionDuration={1000}
       containerClass="carousel-container"
       removeArrowOnDeviceType={["tablet", "mobile"]}
       dotListClass="custom-dot-list-style"
@@ -133,97 +132,96 @@ export default function Jumbotron() {
               </Text>
             </Stack>
           </Center>
-         
         </Flex>
       </div>
       <div>
-         <Center
-            ml={{ base: "0px", md: "5px", lg: "5px" }}
-            mt={{ base: "0px", md: "10px", lg: "10px" }}
-            boxShadow="sm"
-            bg="white"
-            w="100%"
-            h="350px"
-          >
-            <Stack spacing={3} align="center">
-              <Text
-                p="5px"
-                color="white"
-                bg="red"
-                fontSize="3xl"
-                fontWeight="bold"
-              >
-                Know your lotto Terms
-              </Text>
-              <Divider borderColor="red" />
-              <Flex>
-                <HStack spacing={6}>
-                  <Link href="/howtoplay#perming">
-                    <a style={{ color: "red" }}>
-                      <MotionText
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                        cursor="pointer"
-                        fontSize="xl"
-                        color="red"
-                      >
-                        Perming
-                      </MotionText>
-                    </a>
-                  </Link>
-
-                  <Link href="/howtoplay#2sure">
-                    <a style={{ color: "red" }}>
-                      <MotionText
-                        fontSize="xl"
-                        color="red"
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                        cursor="pointer"
-                      >
-                        2Sure
-                      </MotionText>
-                    </a>
-                  </Link>
-
-                  <Link href="/howtoplay#against">
-                    <a style={{ color: "red" }}>
-                      <MotionText
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                        cursor="pointer"
-                        fontSize="xl"
-                        color="red"
-                      >
-                        Against
-                      </MotionText>
-                    </a>
-                  </Link>
-                </HStack>
-              </Flex>
-              <Divider borderColor="red" />
+        <Center
+          ml={{ base: "0px", md: "5px", lg: "5px" }}
+          mt={{ base: "0px", md: "10px", lg: "10px" }}
+          boxShadow="sm"
+          bg="white"
+          w="100%"
+          h="350px"
+        >
+          <Stack spacing={3} align="center">
+            <Text
+              p="5px"
+              color="white"
+              bg="red"
+              fontSize="3xl"
+              fontWeight="bold"
+            >
+              Know your lotto Terms
+            </Text>
+            <Divider borderColor="red" />
+            <Flex>
               <HStack spacing={6}>
-                <MotionImage
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  cursor="pointer"
-                  src="../1.png"
-                />
-                <MotionImage
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  cursor="pointer"
-                  src="../2.png"
-                />
-                <MotionImage
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  cursor="pointer"
-                  src="../3.png"
-                />
+                <Link href="/howtoplay#perming">
+                  <a style={{ color: "red" }}>
+                    <MotionText
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                      cursor="pointer"
+                      fontSize="xl"
+                      color="red"
+                    >
+                      Perming
+                    </MotionText>
+                  </a>
+                </Link>
+
+                <Link href="/howtoplay#2sure">
+                  <a style={{ color: "red" }}>
+                    <MotionText
+                      fontSize="xl"
+                      color="red"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                      cursor="pointer"
+                    >
+                      2Sure
+                    </MotionText>
+                  </a>
+                </Link>
+
+                <Link href="/howtoplay#against">
+                  <a style={{ color: "red" }}>
+                    <MotionText
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                      cursor="pointer"
+                      fontSize="xl"
+                      color="red"
+                    >
+                      Against
+                    </MotionText>
+                  </a>
+                </Link>
               </HStack>
-            </Stack>
-          </Center>
+            </Flex>
+            <Divider borderColor="red" />
+            <HStack spacing={6}>
+              <MotionImage
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                cursor="pointer"
+                src="../1.png"
+              />
+              <MotionImage
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                cursor="pointer"
+                src="../2.png"
+              />
+              <MotionImage
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                cursor="pointer"
+                src="../3.png"
+              />
+            </HStack>
+          </Stack>
+        </Center>
       </div>
       {data.slideShows.map((x, i) => (
         <Image key={i} src={view(x)} h="350px" w="100%" />

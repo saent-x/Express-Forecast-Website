@@ -20,15 +20,16 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {!done ? <Loading /> : null}
-
-      <Layout>
-        <Jumbotron />
-        <LotterySuscriptionTable />
-        <BankcodeAdvert />
-        <GameTimer />
-        <InfoBanner />
-        <TimetableAndInfo />
-      </Layout>
+      <div style={{ display: done ? "block" : "none" }}>
+        <Layout>
+          <Jumbotron />
+          <LotterySuscriptionTable />
+          <BankcodeAdvert />
+          <GameTimer />
+          <InfoBanner />
+          <TimetableAndInfo />
+        </Layout>
+      </div>
     </>
   );
 }

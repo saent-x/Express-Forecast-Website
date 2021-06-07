@@ -15,6 +15,7 @@ import {
 import styles from "../styles/LotterySubscriptionTable.module.css";
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
+import Link from "next/link";
 
 const QUERY = gql`
   {
@@ -49,7 +50,10 @@ export default function LotterySuscriptionTable() {
             <Tr key={i}>
               <Td>
                 <Flex direction="row" align="center">
-                  <Image boxSize={{ base: "50px", lg: "70px", sm: "50px"}} src={`${x.logo.url}`} />
+                  <Image
+                    boxSize={{ base: "50px", lg: "70px", sm: "50px" }}
+                    src={`${x.logo.url}`}
+                  />
                   <Text
                     marginLeft="15px"
                     fontSize={{ base: "sm", md: "xl", lg: "lg", sm: "sm" }}
@@ -61,14 +65,21 @@ export default function LotterySuscriptionTable() {
                 </Flex>
               </Td>
               <Td>
-                <Text
-                  marginLeft="15px"
-                  fontSize={{ base: "sm", md: "xl", lg: "lg", sm: "sm" }}
-                  color="red"
-                  fontWeight="bold"
+                <Link
+                  href={`tel:${x.subscription_code.substring(14)}`}
+                  data-rel="external"
                 >
-                  {x.subscription_code}
-                </Text>
+                  <Text
+                    marginLeft="15px"
+                    fontSize={{ base: "sm", md: "xl", lg: "lg", sm: "sm" }}
+                    color="red"
+                    fontWeight="bold"
+                    cursor="pointer"
+                    _hover={{ textDecoration: "underline" }}
+                  >
+                    {x.subscription_code}
+                  </Text>
+                </Link>
               </Td>
             </Tr>
           ))}

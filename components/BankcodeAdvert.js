@@ -35,33 +35,29 @@ export default function BankcodeAdvert() {
     <Flex direction="row" marginTop="10px" wrap="wrap">
       <Box bg="red" w={{ base: "100%", md: "59%", lg: "59%" }} h="316.88px">
         <Stack spacing={3}>
-            <Center
+          <Center bg="white" h="50px" w="100%">
+            <Text
+              p="5px"
               bg="white"
-              h="50px"
-              w="100%"
+              fontWeight="bold"
+              fontSize="lg"
+              color="red"
             >
-              <Text
-                p="5px"
-                bg="white"
-                fontWeight="bold"
-                fontSize="lg"
-                color="red"
-              >
-                KNOW YOUR BANK CODES
-              </Text>
-            </Center>
+              KNOW YOUR BANK CODES
+            </Text>
+          </Center>
 
           <div style={{ padding: "20px", paddingTop: "10px" }}>
             {codeList.map((x, i) => (
-              <Text
-                fontWeight="bold"
-                fontSize="lg"
-                color="white"
-                key={i}
-                marginLeft="10px"
-              >
-                {x.code}
-              </Text>
+                <Text
+                  fontWeight="bold"
+                  fontSize="lg"
+                  color="white"
+                  key={i}
+                  marginLeft="10px"
+                >
+                  {x.code}
+                </Text>
             ))}
           </div>
         </Stack>

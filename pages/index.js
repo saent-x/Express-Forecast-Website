@@ -17,7 +17,7 @@ export default function Home() {
     <>
       <Head>
         <title>Express Forecast</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/fav-icon.png" />
       </Head>
       {!done ? <Loading /> : null}
       <div style={{ display: done ? "block" : "none" }}>

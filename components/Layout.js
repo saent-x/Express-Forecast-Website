@@ -18,6 +18,7 @@ export default function Layout(props) {
     <ChakraProvider>
       <div className={styles.layout}>
         <Header />
+        <img style={{visibility: "hidden"}} src="//serve.popads.net/cpixel.php?cid=27614859494d058dcdd6aa8e0a5ddc54&amp;value=conversionValue" />
         {props.children}
         <footer className={styles.footer}>
           <Footer />

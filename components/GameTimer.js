@@ -44,7 +44,6 @@ export default function GameTimer() {
   const day = moment().format('dddd');
   let gameTimes = data.timetables.filter(x => x.day.toLocaleLowerCase() === day.toLocaleLowerCase());
 
-
   const filterCountdown = (gameTime) => {
     const date = moment(gameTime, "hh:mm:ss").toDate().valueOf();
     const now = Date.now();
@@ -88,7 +87,7 @@ export default function GameTimer() {
         >
           <VStack>
             <Image src={`${x.operator.logo.url}`} />
-            <Divider marginTop="10px" borderColor="red" w="70%" />
+            {/*<Divider marginTop="10px" borderColor="red" w="70%" />
             <Text textTransform="uppercase" fontSize="lg" fontWeight="bold" color="red">
               NEXT {" "}{x.operator.Operator} {" "} GAME
             </Text>
@@ -110,7 +109,7 @@ export default function GameTimer() {
               onClick={() => router.push(x.link)}
             >
               Play Now
-            </MotionButton>
+            </MotionButton> */}
           </VStack>
         </MotionCenter>
       ))}

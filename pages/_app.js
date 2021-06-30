@@ -34,4 +34,4 @@ s0.parentNode.insertBefore(s1,s0);
   );
 }
 
-export default withGA(process.env.GA_CODE || "", Router)(withData(MyApp));
+export default withGA("UA-116302517-1", Router)(withData(MyApp));

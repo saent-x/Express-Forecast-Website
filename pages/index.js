@@ -18,6 +18,14 @@ export default function Home() {
       <Head>
         <title>Express Forecast</title>
         <link rel="icon" href="/fav-icon.png" />
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116302517-1"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+  gtag('config', 'UA-116302517-1');
+</script>
       </Head>
       {!done ? <Loading /> : null}
       <div style={{ display: done ? "block" : "none" }}>
